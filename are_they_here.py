@@ -3,8 +3,8 @@ import nmap
 from decouple import config
 
 IP_NETWORK = config("IP_NETWORK")
-IP_DEVICE = config("IP_DEVICE")
-DEVICE_NAME = config("DEVICE_NAME")
+IP_DEVICE = config("IP_PHONE")
+DEVICE_NAME = config("PHONE_NAME")
 
 
 def getHostNames():
@@ -19,16 +19,27 @@ def getHostNames():
 
 
 def listenForRhys():
-    proc = subprocess.Popen(["ping", IP_DEVICE], stdout=subprocess.PIPE)
+    process = subprocess.Popen(["ping", IP_DEVICE], stdout=subprocess.PIPE)
+    home = True
     while True:
-        line = proc.stdout.readline()
-        if not line:
-            break
-        # the real code does filtering here
+        line = process.stdout.readline()
         connected_ip = line.decode("utf-8").split()[3]
-        if connected_ip == f"{IP_DEVICE}:":
+        if connected_ip == f"{IP_DEVICE}:" and not home:
             nmScan = nmap.PortScanner()
             nmScan.scan(IP_DEVICE)
             if nmScan[IP_DEVICE].hostname() == DEVICE_NAME:
                 subprocess.Popen(["say", "Rhys is Home"])
-                break
+                home = True
+        elif home:
+            check = 0
+            for i in range(10):
+                line = process.stdout.readline()
+                connected_ip = line.decode("utf-8").split()[3]
+                if connected_ip != f"{IP_DEVICE}:":
+                    check += 1
+            if check >= 8:
+                subprocess.Popen(["say", "Rhys is not Home"])
+                home = False
+
+
+listenForRhys()
