@@ -7,6 +7,8 @@ IP_DEVICE = config("IP_PHONE")
 DEVICE_NAME = config("PHONE_NAME")
 
 
+# Gets list of hostnames and ips active on your network
+# Beware: very slow
 def getHostNames():
     hosts = {}
     nmScan = nmap.PortScanner()
@@ -18,6 +20,7 @@ def getHostNames():
     return hosts
 
 
+# Listens whether a device is or isn't on the network and announces
 def listenForRhys():
     process = subprocess.Popen(["ping", IP_DEVICE], stdout=subprocess.PIPE)
     home = True
