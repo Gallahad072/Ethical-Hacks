@@ -9,7 +9,7 @@ DEVICE_NAME = config("PHONE_NAME")
 
 # Gets list of hostnames and ips active on your network
 # Beware: very slow
-def getHostNames():
+def getHosts():
     hosts = {}
     nmScan = nmap.PortScanner()
     nmScan.scan(IP_NETWORK)
@@ -45,4 +45,5 @@ def listenForRhys():
                 home = False
 
 
-listenForRhys()
+if __name__ == "__main__":
+    listenForRhys()
