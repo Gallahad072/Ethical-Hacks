@@ -16,6 +16,7 @@ def getHosts(network_ip):
     return hosts
 
 
+# Returns Device IP for the device once it's one the network
 def getDeviceIp(device_name):
     IP_NETWORK = config("IP_NETWORK")
     while True:
