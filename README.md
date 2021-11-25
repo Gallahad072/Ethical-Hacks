@@ -42,7 +42,7 @@ Replace the name with then name of the device whose IP you entered
 
 On importing this as a module, one could either run:
 
-`listener.main()`
+`listener.listen()`
 
 > Runs the main program
 
