@@ -6,13 +6,14 @@ from decouple import config
 # Gets list of hostnames and ips active on your network
 # Beware: very slow
 def getHosts(network_ip):
+    print("Getting Hosts:")
     hosts = {}
     nmScan = nmap.PortScanner()
     nmScan.scan(network_ip)
     host_list = nmScan.all_hosts()
     for host in host_list:
         hosts[nmScan[host].hostname()] = host
-
+    print(f"Hosts: {hosts}")
     return hosts
 
 
@@ -23,6 +24,7 @@ def getDeviceIp(device_name):
         hosts = getHosts(IP_NETWORK)
         device_ip = hosts.get(device_name)
         if device_ip:
+            print(f"Device IP: {device_ip}")
             return device_ip
 
 
@@ -39,6 +41,7 @@ def listenForRhys():
             nmScan = nmap.PortScanner()
             nmScan.scan(DEVICE_IP)
             if nmScan[DEVICE_IP].hostname() == DEVICE_NAME:
+                print("Rhys is Home")
                 subprocess.Popen(["say", "Rhys is Home"])
                 home = True
             else:
@@ -52,6 +55,7 @@ def listenForRhys():
                 if connected_ip != f"{DEVICE_IP}:":
                     check += 1
             if check >= 8:
+                print("Rhys is not Home")
                 subprocess.Popen(["say", "Rhys is not Home"])
                 home = False
 
