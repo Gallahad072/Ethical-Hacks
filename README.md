@@ -6,8 +6,6 @@ This [program](listener.py) will announce when a certain device comes off or on 
 
 ## Use
 
-You can use it three ways:
-
 ---
 
 **Run the python file on your computer**
@@ -15,22 +13,6 @@ You can use it three ways:
 Type in the terminal:
 
 `python listener.py`
-
----
-
-**Import and run modules**
-
-For the main program import:
-
-`from listener import main`
-
-> Run this as a function 'main()'
-
-To return a dictionairy of host names and ip addresses on the network import:
-
-`from listener import getHosts`
-
-> Run this as a function 'gethosts()'
 
 ---
 
@@ -55,3 +37,21 @@ Replace the IP's with corresponding ones to your internet and device
 Replace the name with then name of the device whose IP you entered
 
 > If you don't know the name/ip of your device you can run `getHosts()`
+
+## Import
+
+On importing this as a module, one could either run:
+
+`listener.main()`
+
+> Runs the main program
+
+`listener.getHosts()`
+
+> Returns a dictionairy of host names and ip addresses on the network import
+
+`listener.getDeviceIp(device_name)`
+
+> Returns the ip of a device once it's on the network
+>
+> Replace 'device_name' with the name of the device e.g. 'Johns-IPhone.lan'
