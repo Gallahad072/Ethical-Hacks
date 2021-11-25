@@ -29,7 +29,7 @@ def getDeviceIp(device_name):
 
 
 # Listens whether a device is or isn't on the network and announces
-def listenForRhys():
+def listen():
     DEVICE_IP = config("IP_PHONE")
     DEVICE_NAME = config("PHONE_NAME")
     process = subprocess.Popen(["ping", DEVICE_IP], stdout=subprocess.PIPE)
@@ -61,4 +61,4 @@ def listenForRhys():
 
 
 if __name__ == "__main__":
-    listenForRhys()
+    listen()
