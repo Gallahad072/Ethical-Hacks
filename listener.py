@@ -19,13 +19,9 @@ def getHosts(network_ip):
 def getDeviceIp(device_name):
     IP_NETWORK = config("IP_NETWORK")
     while True:
-        print("here")
         hosts = getHosts(IP_NETWORK)
-        print(hosts)
         device_ip = hosts.get(device_name)
-        print(device_ip)
         if device_ip:
-            print("returned")
             return device_ip
 
 
