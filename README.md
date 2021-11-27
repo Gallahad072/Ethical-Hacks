@@ -1,6 +1,6 @@
-# Is Rhys Home?
+# Network Listener
 
-Welcome to a fun way to inflate ones ego.
+Welcome to a fun way to inflate one's ego, be paranoid, or track someone.
 
 This [program](listener.py) will listen and announce when a certain device joins or leaves a network.
 
