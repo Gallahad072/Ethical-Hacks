@@ -2,6 +2,7 @@ import subprocess
 import nmap
 import socket
 import sys
+from datetime import datetime
 
 
 class Device:
@@ -19,12 +20,10 @@ class Device:
         self._ip = ip
 
 
-# Gets list of hostnames and ips active on your network
+# Returns a list of hostnames and ips active on your network
 # Problem: very slow
 def getHosts():
     network_ip = f"{socket.gethostbyname(socket.gethostname())[:10]}0/24"
-
-    print("Getting Hosts ...")
     nmScan = nmap.PortScanner()
     nmScan.scan(network_ip)
     host_list = nmScan.all_hosts()
@@ -33,14 +32,16 @@ def getHosts():
     for host in host_list:
         hosts[nmScan[host].hostname()] = host
 
-    print(f"Hosts: {hosts}")
     return hosts
 
 
 # Creates and returns a device object
 def getDevice():
     selection = input("Do you know the Name and IP of the device? (y/n): ")
-    if selection != "y":
+    if selection == "y":
+        name = input("Device Name: ")
+        ip = input("Device IP: ")
+    else:
         hosts = getHosts()
         print("\nOptions:")
         for i, host in enumerate(hosts):
@@ -53,9 +54,7 @@ def getDevice():
                     confirm = input(f"Listen to {name}? (y/n): ")
                     if confirm == "y":
                         break
-    else:
-        name = input("Device Name: ")
-        ip = input("Device IP: ")
+
     device = Device(name, ip)
     print(f"Device Name: {device.getName()}")
     print(f"Device IP: {device.getIp()}")
@@ -82,6 +81,14 @@ def getNameFromIp(device_ip):
     return device_name
 
 
+# Announces a message
+def announce(name, home):
+    past_verb = "arrived" if home else "left"
+    time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    message = f"{name} has {past_verb} at {time}"
+    print(message)
+
+
 # Listens whether a device is or isn't on the network and announces it
 def listen(name=None, ip=None):
     if name:
@@ -94,27 +101,23 @@ def listen(name=None, ip=None):
     home = False
     while True:
         line = process.stdout.readline()
-        connected_ip = line.decode("utf-8").split()[3]
+        bytes = line.decode("utf-8").split()[0]
 
         if home:
-            check = 0
-            for i in range(10):
+            left = True
+            for i in range(3):
                 line = process.stdout.readline()
-                connected_ip = line.decode("utf-8").split()[3]
-                if connected_ip != f"{device.getIp()}:":
-                    check += 1
-            if check >= 8:
-                message = f"{device.getName()} has left"
-                print(message)
-                subprocess.Popen(["say", message])
+                bytes = line.decode("utf-8").split()[0]
+                if bytes == "64":
+                    left = False
+            if left:
                 home = False
+                announce(name, home)
 
-        elif connected_ip == f"{device.getIp()}:":
+        elif bytes == "64":
             if getNameFromIp(device.getIp()) == device.getName():
-                message = f"{device.getName()} has arrived"
-                print(message)
-                subprocess.Popen(["say", message])
                 home = True
+                announce(name, home)
             else:
                 # Sets new device ip if device name not on active ip
                 device.setIp(getIpFromName(device.getName()))

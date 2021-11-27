@@ -1,6 +1,6 @@
-import socket
-import nmap
 import subprocess
+import nmap
+import socket
 import sys
 from datetime import datetime
 
@@ -57,7 +57,7 @@ def listen(name):
 
         if home:
             left = True
-            for i in range(4):
+            for i in range(3):
                 line = process.stdout.readline()
                 bytes = line.decode("utf-8").split()[0]
                 if bytes == "64":
@@ -66,7 +66,7 @@ def listen(name):
                 home = False
                 announce(name, home)
 
-        elif bytes == "64" and not home:
+        elif bytes == "64":
             home = True
             announce(name, home)
 
