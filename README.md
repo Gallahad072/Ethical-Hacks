@@ -44,7 +44,7 @@ Type in the terminal:
 
 ---
 
-**Run Specific Function**
+**Run Listener on Specified Device**
 
 Type in the terminal:
 
