@@ -50,7 +50,10 @@ def announce(device, home):
 
 
 # Listens whether a device is or isn't on the network
-def listen(device):
+def listen(device=False):
+    if device is False:
+        device = getDevice()
+
     print("Listening...")
     process = subprocess.Popen(["ping", device], stdout=subprocess.PIPE)
     home = False
@@ -76,7 +79,7 @@ def listen(device):
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        listen(getDevice())
+        listen()
     if len(sys.argv) == 2:
         device = sys.argv[1]
         listen(device)
