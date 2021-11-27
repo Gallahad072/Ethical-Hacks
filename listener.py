@@ -20,7 +20,7 @@ class Device:
 
 
 # Gets list of hostnames and ips active on your network
-# Beware: very slow
+# Problem: very slow
 def getHosts():
     network_ip = f"{socket.gethostbyname(socket.gethostname())[:10]}0/24"
 
