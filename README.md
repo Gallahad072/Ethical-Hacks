@@ -2,7 +2,17 @@
 
 Welcome to a fun way to inflate ones ego.
 
-This [program](listener.py) will announce when a certain device comes off or on a network.
+This [program](listener.py) will listen and announce when a certain device joins or leaves a network.
+
+## Requirements
+
+Install [nmap](https://nmap.org/download.html) onto your computer
+
+Install python-nmap with pip:
+
+`pip install python-nmap`
+
+I'm using python 3.9.8
 
 ## Functions
 
