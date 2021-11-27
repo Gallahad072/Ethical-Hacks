@@ -122,7 +122,6 @@ if __name__ == "__main__":
         listen()
     if len(sys.argv) == 2:
         inpt = sys.argv[1]
-        print((sys.argv))
         try:
             locals()[inpt]()
         except KeyError:
