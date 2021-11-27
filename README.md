@@ -12,37 +12,25 @@ Install python-nmap with pip:
 
 `pip install python-nmap`
 
-I'm using python 3.9.8
+I am using python 3.9.8
 
 ## Functions
 
-`listen(name=None, ip=None)`
+`listen(device)`
 
 > This is the main function.
 >
-> Listens whether a device is or isn't on the network and announces it.
+> Listens whether a device is or is not on the network and announces it.
 >
-> If a Name and IP aren't passed in it will create a device..
+> If a device is not passed in it will create a device.
 
 `getHosts()`
 
-> Returns a dictionairy of host names and ip addresses on the network import.
+> Returns a dictionairy of host names and ip addresses on the network.
 
 `getDevice()`
 
-> Creates and returns a device object from user input.
-
-`getIpFromName(device_name)`
-
-> Returns the ip of a device from it's name once it's on the network.
->
-> Replace 'device_name' with the name of the device e.g. 'Johns-IPhone'.
-
-`getNameFromIp(device_ip)`
-
-> Returns the name of a device from it's IP.
->
-> Replace 'device_ip' with the IP of the device e.g. '192.168.0.3'.
+> Returns a device selected by user from active devices on the network.
 
 ## Use
 
@@ -60,7 +48,7 @@ Type in the terminal:
 
 Type in the terminal:
 
-`python listener.py <function> <args>`
+`python listener.py <device name or ip>`
 
 ---
 
