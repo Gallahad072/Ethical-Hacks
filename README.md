@@ -4,11 +4,41 @@ Welcome to a fun way to inflate ones ego.
 
 This [program](listener.py) will announce when a certain device comes off or on a network.
 
+## Functions
+
+`listen(name=None, ip=None)`
+
+> This is the main function.
+>
+> Listens whether a device is or isn't on the network and announces it.
+>
+> If a Name and IP aren't passed in it will create a device..
+
+`getHosts()`
+
+> Returns a dictionairy of host names and ip addresses on the network import.
+
+`getDevice()`
+
+> Creates and returns a device object from user input.
+
+`getIpFromName(device_name)`
+
+> Returns the ip of a device from it's name once it's on the network.
+>
+> Replace 'device_name' with the name of the device e.g. 'Johns-IPhone'.
+
+`getNameFromIp(device_ip)`
+
+> Returns the name of a device from it's IP.
+>
+> Replace 'device_ip' with the IP of the device e.g. '192.168.0.3'.
+
 ## Use
 
 ---
 
-**Run the python file on your computer**
+**Run the Main Program**
 
 Type in the terminal:
 
@@ -16,42 +46,14 @@ Type in the terminal:
 
 ---
 
-**Run on a RaspberryPi**
+**Run Specific Function**
 
-_TO BE MADE_
+Type in the terminal:
+
+`python listener.py <function> <args>`
 
 ---
 
-## Setup
+**Run on a RaspberryPi**
 
-Create a '.env' file and fill it with:
-
-```
-IP_NETWORK = "192.168.x.0/24"
-IP_PHONE = "192.168.x.xx"
-PHONE_NAME = "Johns-IPhone.lan"
-```
-
-Replace the IP's with corresponding ones to your internet and device
-
-Replace the name with then name of the device whose IP you entered
-
-> If you don't know the name/ip of your device you can run `getHosts()`
-
-## Import
-
-On importing this as a module, one could either run:
-
-`listener.listen()`
-
-> Runs the main program
-
-`listener.getHosts()`
-
-> Returns a dictionairy of host names and ip addresses on the network import
-
-`listener.getDeviceIp(device_name)`
-
-> Returns the ip of a device once it's on the network
->
-> Replace 'device_name' with the name of the device e.g. 'Johns-IPhone.lan'
+_TO BE MADE_
