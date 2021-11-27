@@ -37,26 +37,6 @@ def getHosts():
     return hosts
 
 
-# Returns Device IP for the device once it's one the network
-def getIpFromName(device_name):
-    while True:
-        hosts = getHosts()
-        device_ip = hosts.get(device_name)
-        if device_ip:
-            print(f"Device IP: {device_ip}")
-            return device_ip
-
-
-# Returns evice name from the ip
-def getNameFromIp(device_ip):
-    print(f"Scanning for device name on IP port {device_ip} ...")
-    nmScan = nmap.PortScanner()
-    nmScan.scan(device_ip)
-    device_name = nmScan[device_ip].hostname()
-    print(f"Device name on {device_ip}: {device_name}")
-    return device_name
-
-
 # Creates and returns a device object
 def getDevice():
     selection = input("Do you know the Name and IP of the device? (y/n): ")
@@ -82,7 +62,27 @@ def getDevice():
     return device
 
 
-# Listens whether a device is or isn't on the network and announces
+# Returns Device IP for the device once it's one the network
+def getIpFromName(device_name):
+    while True:
+        hosts = getHosts()
+        device_ip = hosts.get(device_name)
+        if device_ip:
+            print(f"Device IP: {device_ip}")
+            return device_ip
+
+
+# Returns Device name from the ip
+def getNameFromIp(device_ip):
+    print(f"Scanning for device name on IP port {device_ip} ...")
+    nmScan = nmap.PortScanner()
+    nmScan.scan(device_ip)
+    device_name = nmScan[device_ip].hostname()
+    print(f"Device name on {device_ip}: {device_name}")
+    return device_name
+
+
+# Listens whether a device is or isn't on the network and announces it
 def listen(name=None, ip=None):
     device = Device(name, ip) if name and ip else getDevice()
 
