@@ -84,7 +84,10 @@ def getNameFromIp(device_ip):
 
 # Listens whether a device is or isn't on the network and announces it
 def listen(name=None, ip=None):
-    device = Device(name, ip) if name and ip else getDevice()
+    if name:
+        device = Device(name, ip) if name and ip else Device(name, getIpFromName(name))
+    else:
+        device = getDevice()
 
     print("Listening...")
     process = subprocess.Popen(["ping", device.getIp()], stdout=subprocess.PIPE)
