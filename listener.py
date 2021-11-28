@@ -6,12 +6,14 @@ from datetime import datetime
 
 
 # Returns a list of hostnames and ips active on your network
-# todo: very slow
+# FIXME very slow
 def getHosts():
     network_ip = (
-        # todo: Is not accurate
+        # FIXME Is not accurate
         f"{socket.gethostbyname(socket.gethostname())[:10]}0/24"
     )
+    print(network_ip)
+    # TODO change nmap to scapy
     nmScan = nmap.PortScanner()
     nmScan.scan(network_ip)
     host_list = nmScan.all_hosts()
