@@ -49,9 +49,3 @@ Type in the terminal:
 Type in the terminal:
 
 `python listener.py <device name or ip>`
-
----
-
-**Run on a RaspberryPi**
-
-_TO BE MADE_
