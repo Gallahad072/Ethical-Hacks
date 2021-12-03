@@ -34,15 +34,11 @@ I am using python 3.9.8
 
 ## Use
 
----
-
 **Run the Main Program**
 
 Type in the terminal:
 
 `python listener.py`
-
----
 
 **Run Listener on Specified Device**
 
