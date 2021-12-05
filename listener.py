@@ -8,10 +8,10 @@ from datetime import datetime
 # Returns a list of hostnames and ips active on your network
 # FIXME very slow
 def getHosts():
-    network_ip = (
-        # FIXME Is not accurate
-        f"{socket.gethostbyname(socket.gethostname())[:10]}0/24"
-    )
+    # network_ip = (
+    # FIXME Is not accurate
+    #     f"{socket.gethostbyname(socket.gethostname())[:10]}0/24"
+    # )
     network_ip = "192.168.1.0/24"
     print(network_ip)
     # TODO change nmap to scapy
