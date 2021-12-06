@@ -4,6 +4,23 @@ from PIL import Image
 from PIL.ExifTags import GPSTAGS, TAGS
 
 
+def removeExifData():
+    for root, _, files in os.walk(os.getcwd()):
+        if root.split("/")[-1] == "images":
+            root += "/"
+            break
+    for file_name in files:
+        try:
+            with Image.open(root + file_name) as img:
+                img_no_exif = Image.new(img.mode, img.size)
+                # Copy the pixel data from img_data.
+                img_no_exif.putdata(list(img.getdata()))
+                # Save without exif data.
+                img_no_exif.save(root + file_name)
+        except IOError:
+            print("File format not supported!")
+
+
 def convertDecimalDegrees(degree, minutes, seconds, direction):
     decimal_degrees = degree + minutes / 60 + seconds / 3600
     if direction == "S" or direction == "W":
@@ -29,8 +46,7 @@ def getLocationUrl(gps_coords):
 
 def getExifData(all=False):
     gps_coords = dict()
-    for root, dirs, files in os.walk(os.getcwd()):
-        print(root, dirs, files)
+    for root, _, files in os.walk(os.getcwd()):
         if root.split("/")[-1] == "images":
             root += "/"
             break
@@ -39,7 +55,7 @@ def getExifData(all=False):
             print(f"\n\n{file_name}\n{'-'*len(file_name)}")
             with Image.open(root + file_name) as image:
                 if image._getexif() == None:
-                    print(f"{file_name} contains no exif data.")
+                    print("No Exif Data Found")
                     continue
                 else:
                     for tag_num, value in image._getexif().items():
@@ -72,6 +88,15 @@ if __name__ == "__main__":
         func = sys.argv[1]
         try:
             locals()[func]()
+        except KeyError:
+            print("Error: Function not found!")
+    elif len(sys.argv) == 3:
+        func = sys.argv[1]
+        all = True if sys.argv[2] == "all" else False
+        try:
+            locals()[func](all)
+        except TypeError:
+            print("Error: Invalid arguments")
         except KeyError:
             print("Error: Function not found!")
     else:
