@@ -1,36 +1,28 @@
-# Network Listener
+# EXIF Tool
 
-Welcome to a fun way to inflate one's ego, be paranoid, or track someone.
-
-This [program](listener.py) will listen and announce when a certain device joins or leaves a network.
+This [program](exif.py) find or remove valuable EXIF data from images.
 
 ## Requirements
 
-Install [nmap](https://nmap.org/download.html) onto your computer
+Install Pillow with pip:
 
-Install python-nmap with pip:
-
-`pip install python-nmap`
+`pip install Pillow`
 
 I am using python 3.9.8
 
 ## Functions
 
-`listen(device)`
+`getExifData(all=False)`
 
 > This is the main function.
 >
-> Listens whether a device is or is not on the network and announces it.
+> Prints EXIF data for every image in the images folder.
 >
-> If a device is not passed in it will create a device.
+> If 'all' is set to True, all data will be displayed, otherwise only crucial data will be displayed.
 
-`getHosts()`
+`removeExifData()`
 
-> Returns a dictionairy of host names and ip addresses on the network.
-
-`getDevice()`
-
-> Returns a device selected by user from active devices on the network.
+> Removes EXIF data from all the images in the image folder.
 
 ## Use
 
@@ -38,10 +30,16 @@ I am using python 3.9.8
 
 Type in the terminal:
 
-`python listener.py`
+`python exif.py`
 
-**Run Listener on Specified Device**
+**Run Specific Function**
 
 Type in the terminal:
 
-`python listener.py <device name or ip>`
+`python exif.py <function name> <all?>`
+
+Only the function name is required but, if 'all' is put after 'getExifData', 'all' will be set to True.
+
+For example:
+
+`python exif.py getExifData all`
