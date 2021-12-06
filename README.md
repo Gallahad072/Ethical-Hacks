@@ -2,6 +2,11 @@
 
 Python programs that perform ethical hacks.
 
+## Disclaimer
+
+- These scripts are for educational purposes only.
+- Do not use against any computers/data/networks that you don't own or have authorization to test.
+
 ## Programs
 
 - **[Network Listener](Network-Listener/README.md)**
